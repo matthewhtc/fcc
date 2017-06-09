@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pomodoro Clock</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="tomato.css">
+</head>
+<body>
+<audio id="audio" src="http://themushroomkingdom.net/sounds/wav/smb/smb_powerup.wav" autostart="false" ></audio>
+
+<div id="container">
+	<div id="title">Pomodoro</div>
+	<div id="childContainer">
+		<div id="settings">
+			<div id="sessionLength">
+				<span>Session</span>
+				<div class="incDec">
+					<a href="#"><i id="minusSessionBtn" class="fa fa-minus" aria-hidden="true"></i></a> <span id="secondarySessionDisplay">25</span> <a id="plusSessionBtn" href="#"><i  class="fa fa-plus" aria-hidden="true"></i></a>
+				</div>    
+			</div> <!--sessionLength-->
+
+			<div id="breakLength">
+			    <span>Break</span>
+			    <div class="incDec">
+			    	<a href="#"><i id="minusBreakBtn" class="fa fa-minus" aria-hidden="true"></i></a> <span id="breakDisplay">5</span> <a href="#"><i id="plusBreakBtn" class="fa fa-plus" aria-hidden="true"></i></a>
+			    </div>  
+			</div> <!--breakLength-->
+		</div> <!--settings-->
+	</div><!--childContainer-->
+
+	<div id="nav"> <!--20px height, 
+	- 300px width
+    - 290 width with 5px margin.
+    -->
+		<a href="https://www.freecodecamp.com" target="_blank"><i id="fccBtn" class="fa fa-free-code-camp" aria-hidden="true"></i></a>
+   		<a href="#" id="startBtn"><i class="fa fa-play" aria-hidden="true"></i></a>
+    	<a href="#"><i id="resetBtn" class="fa fa-repeat" aria-hidden="true"></i></a>
+	</div>
+</div>
+
+<p>Coded and designed by <a id="name" href="https://www.freecodecamp.com/matthewhtc" target="_blank">Matthew Chan</a>.</p>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="refactored.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>

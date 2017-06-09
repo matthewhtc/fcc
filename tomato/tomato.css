@@ -1,0 +1,113 @@
+body {
+
+  background: #ff4b1f;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #1fddff, #ff4b1f);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #1fddff, #ff4b1f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: Lato;
+  color: #eaf0f7;
+  
+}
+
+a:hover, a:link, a:visited {
+	text-decoration: none; 
+	color: #eaf0f7;
+}
+
+#display {
+  font-weight: 300; 
+}
+
+#container {
+  margin: 5% auto; 
+  width: 300px; 
+  height: 140px; 
+  background: #eeaa7b; 
+  position: relative; 
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+#childContainer {
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+  background: #e37222; 
+  /*comment out bottom 3 lines for when adjusting session and break times*/
+  /*line-height: 80px; 
+  text-align: center; 
+  font-size: 2.7em; */
+  height: 80px; 
+  width: 316px;
+  position:absolute; 
+  /*bottom four lines are a trick to align vertically and horizontally*/
+  top:50%;  
+  left: 50%; 
+  /*margin-top: negative half of childs height
+   *margin-left: negative half of childs width
+   */
+  margin-top:-40px; 
+  margin-left: -158px; 
+} 
+
+#title {
+  line-height: 30px; 
+  margin-left: 12px;  
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+ 
+}
+
+#nav {
+  text-align: center; 
+  margin: 80px 12px 0 12px; 
+  line-height: 30px; 
+}
+
+#resetBtn {
+  line-height: 30px; 
+  float: right;
+  
+}
+
+#fccBtn {
+  line-height: 30px;
+  float: left; 
+}
+
+p {
+  text-align: center; 
+}
+
+#sessionLength {
+  float: left; 
+  margin-left: 50px;
+}
+
+#breakLength {
+  float: right; 
+  margin-right: 50px;
+}
+
+#sessionLength, #breakLength {
+	margin-top: 20px;
+	text-transform: uppercase; 
+	letter-spacing: 1px;
+}
+
+.incDec {
+	text-align: center;
+}
+
+.displaySettings {
+	line-height: 80px;
+	text-align: center;
+	font-size: 2.7em;
+}
+
+.timeStyling {
+	text-transform: uppercase; 
+	vertical-align: top; 
+	font-size: 0.3em;
+
+}
+
+#childContainer, #settings {
+	transition: none;
+}
