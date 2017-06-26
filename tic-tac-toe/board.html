@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tic Tac Toe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="board.css">
+</head>
+<body>
+
+
+ 
+ <!-- POP UP MESSAGE WHEN SOMEONE WINS -->
+<div data-role="page" id="firstPopup" class="popup" data-popup="popup-1">
+    <div class="popup-inner">
+    	<div id="winningMessage">
+	        <div><h2>YOU WIN!</h2></div>
+	        <p>Would you like to play again?</p>
+        </div>
+        <div id="yesNo">
+        	<a id="play" class="playAgain" href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+        	<a id="quit" class="playAgain" href="#" ><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
+    
+
+<!-- END OF POPUP MESSAGE  -->
+
+<h1>Tic Tac Toe</h1>
+<table>
+	<tr>
+		<td class="board" value=0></td>
+		<td class="board" value=1></td>
+		<td class="board" value=2></td>
+	</tr>
+	<tr>
+		<td class="board" value=3></td>
+		<td class="board" value=4></td>
+		<td class="board" value=5></td>
+	</tr>
+	<tr>
+		<td class="board" value=6></td>
+		<td class="board" value=7></td>
+		<td class="board" value=8></td>
+	</tr>
+</table>
+<footer>
+	Designed and coded by <a href="https://www.freecodecamp.com/matthewhtc" target="_blank">Matthew Chan</a>. 
+	<hr>
+	<div id="icons">
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a id="x" href="https://www.instagram.com/matthewhtc" target="_blank"><i class="fa fa-instagram fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://github.com/matthewhtc/" target="_blank"><i class="fa fa-github-alt fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://www.linkedin.com/in/matthewhtchan/" target="_blank"><i class="fa fa-linkedin fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://codepen.io/matthew_htc/" target="_blank"><i class="fa fa-codepen fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+	</div>
+</footer>
+<!-- <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+<script src="board.js" type="text/javascript" charset="utf-8" async defer></script>
+</body>
+</html>

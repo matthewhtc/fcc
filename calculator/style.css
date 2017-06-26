@@ -1,0 +1,53 @@
+.btn {
+  height: 80px;
+  width: 80px;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+  background: #c5cbd6;
+  font-size: 1.5em; 
+}
+
+.horizontal {
+	margin: 0 auto; 
+	
+}
+
+#calc {
+	height: 400px;
+	width: 332px;
+	margin: 3% auto;
+	background: #c5cbd6;
+}
+
+
+
+#display {
+	margin-left: 0;
+	margin-right: 0;
+	width: 332px;
+	height: 80px;
+	background: pink;
+	text-align: center;
+	letter-spacing: 2px; 
+	font-size: 1.5em;
+	padding-top: 8%;
+}
+
+body {
+	background: #eaf0f9; 
+}
+
+h1, h3 {
+	font-family: La Belle Aurore;
+	text-align: center;
+}
+
+a:visited, a:link {
+	text-decoration: none; 
+	color: black;
+}
+
+a:hover {
+	color: #e89daa;
+}

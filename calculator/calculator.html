@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|La+Belle+Aurore" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1>A Very Simple Calculator</h1>
+  <div id="calc">
+    <div class="horizontal"> 
+      <div id="display"></div>
+    </div> <!--row-->
+
+    <div class="horizontal">
+      <div class="whole-row">
+        <button class=" number-btn btn" value=7>7</button>
+        <button class=" number-btn btn" value=8>8</button>
+        <button class=" number-btn btn" value=9>9</button>
+        <button class=" btn clear-btn">CE</button>
+      </div>
+    </div> <!--row-->
+    
+    <div class="horizontal">
+      <button class=" number-btn btn" value=4>4</button>
+      <button class=" number-btn btn" value=5>5</button>
+      <button class=" number-btn btn" value=6>6</button>
+      <button class=" operator btn" value="/">÷</button>
+    </div> <!--row-->
+    
+    <div class="horizontal">
+      <button class=" number-btn btn" value=1>1</button>
+      <button class=" number-btn btn" value=2>2</button>
+      <button class=" number-btn btn" value=3>3</button>
+      <button class=" operator btn" value="*">x</button>
+    </div> <!--row-->
+    
+    <div class="horizontal">
+      <button class=" operator btn" value="0">0</button>
+      <button id="equal" class=" btn" value='='>=</button>
+      <button class=" operator btn" value="-">-</button>
+      <button id="add" class="operator btn" value="+">+</button>
+    </div> <!-- row -->
+  </div> <!--#calc-->
+
+  <h3>Designed and coded by <a href="https://www.freecodecamp.com/matthewhtc" target="_blank">Matthew Chan</a>.</h3>
+</div> <!-- container -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="calculator.js"></script>
+</body>
+</html>
