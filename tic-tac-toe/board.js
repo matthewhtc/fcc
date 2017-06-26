@@ -1,7 +1,8 @@
-var player1 = "O"; //player1 = triangle
+var player1 = "O"; //player1 = cross
 var player2 = "X"; //player2 = circle
 var turn = "O"; 
 var originalBoard = [0 ,1 ,2, 3, 4, 5, 6, 7, 8];
+var checkForTie = 0; 
 var popup = $("#firstPopup"); 
 var undoStyles = {
 	backgroundColor: "e9e9e9", 
@@ -9,7 +10,7 @@ var undoStyles = {
 }
 
 
-$(document).on("click", "#play", function() {
+$(document).on("touchstart touch click", "#play", function() {
 	//remove <i> icon to delete x's and o's
 	$("td").html(""); 
 	//remove old styling
@@ -20,11 +21,13 @@ $(document).on("click", "#play", function() {
 	originalBoard = [0 ,1 ,2, 3, 4, 5, 6, 7, 8];
 	//reset who goes first
 	turn = "O"; 
+	//reset counter to zero to continually check for ties
+	checkForTie = 0; 
 	//fade out popup modal
 	popup.fadeOut(350); 
 }); 
 
-$(document).on("click", "#quit", function(event) {
+$(document).on("touchstart touch click", "#quit", function(event) {
 	$(".popup-inner").fadeOut(200, function() {
 			$(this).html(""); 
 		});
@@ -42,11 +45,15 @@ $(document).on("click", "#quit", function(event) {
 });
 
 //manipulate
-$(document).on("click", ".board", function() {
+$(document).on("touchstart touch click", ".board", function() {
+	//increment counter that will keep track when the game is over via tie
+	checkForTie++; 
+
+	
 	//if player 1, fill with colour purple
 	if (typeof originalBoard[Number($(this).attr("value"))] == "number") {
-		if (turn == "O") {
-			//add class for styling
+		if (turn == "X") {
+			//add class for stylings
 			$(this).addClass("cross"); 
 			
 			$(this).css(undoStyles); 
@@ -71,7 +78,14 @@ $(document).on("click", ".board", function() {
 		}
 
 		//check for a winner
-		if (winning(originalBoard, turn)) {
+		if (winning(originalBoard, turn) && checkForTie == 9 || winning(originalBoard, turn)) {
+			popup.fadeIn(350);  
+		}
+
+		//check for a tie
+		else if (checkForTie == 9) { //9 means that all 9 spots of the board have been clicked
+			console.log("tie"); 
+			$("#winningMessage").html("<div><h2>We have a draw!</h2></div><p>Would you like to play again?</p>");
 			popup.fadeIn(350);  
 		}
 
