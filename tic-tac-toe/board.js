@@ -10,6 +10,7 @@ var undoStyles = {
 }
 
 
+//restart
 $(document).on("touchstart touch click", "#play", function() {
 	//remove <i> icon to delete x's and o's
 	$("td").html(""); 
@@ -24,22 +25,25 @@ $(document).on("touchstart touch click", "#play", function() {
 	//reset counter to zero to continually check for ties
 	checkForTie = 0; 
 	//fade out popup modal
-	popup.fadeOut(350); 
+	popup.fadeOut(200); 
+	
 }); 
 
 $(document).on("touchstart touch click", "#quit", function(event) {
-	$(".popup-inner").fadeOut(200, function() {
-			$(this).html(""); 
-		});
-		event.stopPropagation(); //will stop event bubbling
-	$(".popup-inner").fadeIn(200, function() {
-		$(this).html('<div id="sadFace"><i class="fa fa-frown-o" aria-hidden="true"></i><p>If you do change your mind, you\'re going to have to hit refresh!</p><p>Hope you had fun!</p></div>'); 
-	});
-	event.stopPropagation(); //will stop event bubbling
+	// $(".popup-inner").fadeOut(200, function() {
+	// 		$(this).html(""); 
+	// 	});
+	// 	event.stopPropagation(); //will stop event bubbling
+	// $(".popup-inner").fadeIn(200, function() {
+	// 	$(this).html('<div id="sadFace"><i class="fa fa-frown-o" aria-hidden="true"></i><p>If you do change your mind, you\'re going to have to hit refresh!</p><p>Hope you had fun!</p></div>'); 
+	// });
+	// event.stopPropagation(); //will stop event bubbling
 
 	// $(this).fadeIn(1000, function() {
 	// 	$(".popup-inner").html("SAD FACE"); 
 	// });
+
+	popup.fadeOut(350); 
 	
 
 });
@@ -76,15 +80,18 @@ $(document).on("touchstart touch click", ".board", function() {
 			//add player's move to the originalBoard
 			originalBoard[Number($(this).attr("value"))] = turn; 
 		}
-
+		// console.log("checkForTie: " + checkForTie); 
 		//check for a winner
 		if (winning(originalBoard, turn) && checkForTie == 9 || winning(originalBoard, turn)) {
+			// console.log("who's turn is it?: " + turn); 
+			$("#winningMessage").html("<div><h2>YOU WIN!</h2></div><p>Would you like to play again?</p>");
 			popup.fadeIn(350);  
 		}
 
 		//check for a tie
 		else if (checkForTie == 9) { //9 means that all 9 spots of the board have been clicked
-			console.log("tie"); 
+			// console.log("tie"); 
+			// console.log("who's turn is it?: " + turn); 
 			$("#winningMessage").html("<div><h2>We have a draw!</h2></div><p>Would you like to play again?</p>");
 			popup.fadeIn(350);  
 		}
