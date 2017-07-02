@@ -27,12 +27,12 @@ a {
 }
 
 a:visited, a:link {
-  color: #191919;
-  text-decoration: none;
+	color: #191919;
+	text-decoration: none;
 }
 
 a:hover {
-	color: #99d3df;	
+	color: #88bbd6;	
 }
 
 hr {
@@ -71,7 +71,7 @@ hr {
 	transform:scale(1.1);
 }
 
-.cross {
+.times {
 	background: none;
 	color: #99d3df;
 	font-size: 100px;
@@ -96,8 +96,18 @@ hr {
 	font-size: 100px;
 }
 
-#play {
+.left {
 	margin-right: 20px;
+}
+
+.right {
+	margin-left: 20px;
+}
+
+.mainMessage {
+	text-align: center; 
+	letter-spacing: 1.5px;
+
 }
 
 #play:hover {
@@ -105,25 +115,24 @@ hr {
 	color: #5cb85c;
 }
 
-#quit {
-	margin-left: 20px;
-}
-
 #quit:hover {
 	transition:ease 0.25s all;
     color: #d44950;
 }
 
-
-#winningMessage {
-	text-align: center; 
-	letter-spacing: 1.5px;
-
-}
-
-#yesNo {
+#yesNo, #playerMode, #weapon {
 	text-align: center;
 	font-size: 35px;
+}
+
+#weaponX:hover {
+	transition: ease 0.25s all; 
+	color: #99d3df;
+}
+
+#weaponO:hover {
+	transition: ease 0.25s all; 
+	color: #88bbd6;
 }
 
 #icons {
@@ -136,19 +145,26 @@ hr {
 
 /*modal stuff*/
 /* Outer */
-.popup {
+.popup, .popup2 {
     width: 100%;
     height: 100%;
-    display: none;
     position: fixed;
     top: 0px;
     left: 0px;
     background: rgba(0,0,0,0.75);
 }
+
+.popup2 {
+	display: inline; 
+}
+
+.popup {
+	display: none; 
+}
  
 /* Inner */
 /* enables the inner popup to be exactly centered no matter what the size of the screen */
-.popup-inner {
+.popup-inner, .popup-inner2 {
     max-width: 400px;
     width: 90%;
     padding: 40px;
