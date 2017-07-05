@@ -161,7 +161,7 @@ function boardSetup(p1, p2, singlePlayerMode) {
 				//add player's move to the originalBoard
 				originalBoard[Number($(this).attr("value"))] = p2.letter; 
 			}
-			console.log("who's turn is it?: " + turn.letter); 
+			//console.log("who's turn is it?: " + turn.letter); 
 
 			//check for a winner
 			checkWinner(turn); 
