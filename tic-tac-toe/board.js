@@ -1,8 +1,10 @@
 player1 = {
+	name: "Player 1",
 	letter: "X", 
 	weapon: "times"
 };
-	player2 = {
+player2 = {
+	name: "Player 2", 
 	letter: "O", 
 	weapon: "circle"
 };
@@ -48,7 +50,7 @@ function buttonSetup() {
 		//reset board
 		originalBoard = [0 ,1 ,2, 3, 4, 5, 6, 7, 8];
 		//reset who goes first
-		turn = "O"; 
+		turn = player1; 
 		//reset counter to zero to continually check for ties
 		checkForTie = 0; 
 		//fade out popup modal
@@ -76,6 +78,8 @@ function buttonSetup() {
 		if (mode == true) { //mode == true means singlePlayer
 			huPlayer = player1; 
 			aiPlayer = player2; 
+			huPlayer.name = "Human";
+			aiPlayer.name = "The computer"; 
 			boardSetup(huPlayer, aiPlayer, mode);
 		} else {
 			//the default settings already match the weapon chosen, so just setupBoard
@@ -126,12 +130,14 @@ function twoPlayerSetup() {
 }
 
 function boardSetup(p1, p2, singlePlayerMode) {
-	turn = p1.letter; 
+	turn = p1; 
+	//turn = p1.letter;
+	console.log("turn.letter: " + turn.letter)
 	
 	$(document).on("touchstart touch click", ".board", function() {
 	
 		if (typeof originalBoard[Number($(this).attr("value"))] == "number") {
-			if (turn == p1.letter || singlePlayerMode) {
+			if (turn.letter == p1.letter || singlePlayerMode) {
 				//add class for styling
 				$(this).addClass(p1.weapon); 
 				$(this).css(undoStyles); 
@@ -145,7 +151,7 @@ function boardSetup(p1, p2, singlePlayerMode) {
 					//use setTimeout so that there is the slightest delay and computer doesn't play immediately
 					setTimeout(computerTurn, 100); 
 				}		
-			} else {
+			} else { //else, two player mode
 				//add class for styling
 				$(this).addClass(p2.weapon); 
 				$(this).css(undoStyles); 
@@ -153,33 +159,39 @@ function boardSetup(p1, p2, singlePlayerMode) {
 				//add actual circle to the board
 				$(this).html('<i class="fa fa-' + p2.weapon + '" aria-hidden="true"></i>'); 
 				//add player's move to the originalBoard
-				originalBoard[Number($(this).attr("value"))] = turn; 
+				originalBoard[Number($(this).attr("value"))] = p2.letter; 
 			}
+			console.log("who's turn is it?: " + turn.letter); 
 
 			//check for a winner
-			if (winning(originalBoard, turn) && emptyIndexies(originalBoard).length == 0 || winning(originalBoard, turn)) {
-				// console.log("who's turn is it?: " + turn); 
-				$(".mainMessage").html("<div><h2>YOU WIN!</h2></div><p>Would you like to play again?</p>");
-				popup.fadeIn(350);  
-			}
+			checkWinner(turn); 
+			
 
-			//check for a tie
-			else if (emptyIndexies(originalBoard).length == 0) { //9 means that all 9 spots of the board have been clicked
-				// console.log("tie"); 
-				// console.log("who's turn is it?: " + turn); 
-				$(".mainMessage").html("<div><h2>We have a draw!</h2></div><p>Would you like to play again?</p>");
-				popup.fadeIn(350);  
+			if (!singlePlayerMode) {
+				if (turn.letter == p1.letter) {
+					turn = p2; 
+				}
+				else {
+					turn = p1; 
+				}
 			}
-
-			if (turn == p1.letter) {
-				turn = p2.letter; 
-			}
-			else {
-				turn = p1.letter; 
-			}
+			
 		}
 				 
 	});	
+}
+
+function checkWinner(player) {
+	if (winning(originalBoard, player.letter) && emptyIndexies(originalBoard).length == 0 || winning(originalBoard, player.letter)) {
+		$(".mainMessage").html("<div><h2 id='win'>" + player.name + " wins!</h2></div><p>Would you like to play again?</p>");
+		popup.fadeIn(350);  
+	}
+
+	//check for a tie
+	else if (emptyIndexies(originalBoard).length == 0) { 
+		$(".mainMessage").html("<div><h2>We have a draw!</h2></div><p>Would you like to play again?</p>");
+		popup.fadeIn(350);  
+	}
 }
 /*
  *
@@ -266,13 +278,14 @@ function computerTurn() {
 
 	//add class for stylings
 	$(tableValue).addClass(aiPlayer.weapon); 
-			
 	$(tableValue).css(undoStyles); 
-	//add actual cross to the board
 	$(tableValue).html('<i class="fa fa-' + aiPlayer.weapon + '" aria-hidden="true"></i>');
 
 	//add computer's move from object returned from minimax 
 	originalBoard[bestMove.index] = aiPlayer.letter;  
+
+	//check for a winner
+	checkWinner(aiPlayer); 
 }
 
 // returns the available spots on the board in an array
@@ -293,8 +306,7 @@ function winning(board, player){
         (board[2] == player && board[4] == player && board[6] == player)
     ) {
 		return true;
-    } 
-    else {
+    } else {
         return false;
     }
 }

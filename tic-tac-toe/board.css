@@ -110,6 +110,10 @@ hr {
 
 }
 
+#win {
+	text-transform: uppercase;
+}
+
 #play:hover {
 	transition:ease 0.25s all;
 	color: #5cb85c;
