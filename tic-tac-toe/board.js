@@ -93,6 +93,8 @@ function buttonSetup() {
 		if (mode == true) { //mode == true means singlePlayer
 			huPlayer = player2; 
 			aiPlayer = player1; 
+			huPlayer.name = "Human";
+			aiPlayer.name = "The computer"; 
 			boardSetup(huPlayer, aiPlayer, mode);
 		} else {
 			//first param is now player2, as player2 is weapon"O"
@@ -132,7 +134,7 @@ function twoPlayerSetup() {
 function boardSetup(p1, p2, singlePlayerMode) {
 	turn = p1; 
 	//turn = p1.letter;
-	console.log("turn.letter: " + turn.letter)
+	//console.log("turn.letter: " + turn.letter)
 	
 	$(document).on("touchstart touch click", ".board", function() {
 	
@@ -166,18 +168,14 @@ function boardSetup(p1, p2, singlePlayerMode) {
 			//check for a winner
 			checkWinner(turn); 
 			
-
 			if (!singlePlayerMode) {
 				if (turn.letter == p1.letter) {
 					turn = p2; 
-				}
-				else {
+				} else {
 					turn = p1; 
 				}
-			}
-			
-		}
-				 
+			}	
+		}			 
 	});	
 }
 
