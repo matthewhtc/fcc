@@ -98,6 +98,8 @@ function buttonSetup() {
 			boardSetup(huPlayer, aiPlayer, mode);
 		} else {
 			//first param is now player2, as player2 is weapon"O"
+			player2.name = "Player 1"; //need to switch names cuz user picked "circle"
+			player1.name = "Player 2"; //cuz player1 and player2 are hardcoded at the top
 			boardSetup(player2, player1, mode); 
 		}
 		$("#initPopup").fadeOut(350); 
