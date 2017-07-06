@@ -9,6 +9,72 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<h1>Hello world</h1>
+<h1>Tic Tac Toe</h1>
+<table>
+	<tr>
+		<td class="board" value=0></td>
+		<td class="board" value=1></td>
+		<td class="board" value=2></td>
+	</tr>
+	<tr>
+		<td class="board" value=3></td>
+		<td class="board" value=4></td>
+		<td class="board" value=5></td>
+	</tr>
+	<tr>
+		<td class="board" value=6></td>
+		<td class="board" value=7></td>
+		<td class="board" value=8></td>
+	</tr>
+</table>
+<footer>
+	Designed and coded by <a href="https://www.freecodecamp.com/matthewhtc" target="_blank">Matthew Chan</a>. 
+	<hr>
+	<div id="icons">
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a id="x" href="https://www.instagram.com/matthew_htc" target="_blank"><i class="fa fa-instagram fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://github.com/matthewhtc/" target="_blank"><i class="fa fa-github-alt fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://www.linkedin.com/in/matthewhtchan/" target="_blank"><i class="fa fa-linkedin fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+		<span class="fa-stack fa-lg">
+		  <i class="fa fa-circle fa-stack-2x"></i>
+		  <a href="https://codepen.io/matthew_htc/" target="_blank"><i class="fa fa-codepen fa-stack-1x fa-inverse" aria-hidden="true"></i></a>
+		</span>	
+	</div>
+</footer>
+
+<!-- if modal has a fixed or relative position, it needs to be outside everything, right before </body>-->
+<div data-role="page" id="initPopup" class="popup2" data-popup="popup-1">
+    <div class="popup-inner2">
+    	<div class="mainMessage">
+	        <div><h2>Pick your player mode:</h2></div>
+        </div>
+        <div id="playerMode">
+	    	<a id="singlePlayer" class="left"><i class="fa fa-user" aria-hidden="true"></i></a>
+	    	<a id="twoPlayer" class="right"><i class="fa fa-user" aria-hidden="true"></i><i class="fa fa-user" aria-hidden="true"></i></a>
+	    </div>
+    </div>
+</div>
+
+ <!-- POP UP MESSAGE WHEN SOMEONE WINS -->
+<div data-role="page" id="firstPopup" class="popup" data-popup="popup-1">
+    <div class="popup-inner">
+    	<div class="mainMessage">
+	        <div><h2>YOU WIN!</h2></div>
+	        <p>Would you like to play again?</p>
+        </div>
+        <div id="yesNo">
+        	<a id="play" class="playAgain left" href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+        	<a id="quit" class="playAgain right" href="#" ><i class="fa fa-times" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
