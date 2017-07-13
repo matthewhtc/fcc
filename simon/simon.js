@@ -1,3 +1,4 @@
+
 //each colour squares will be given a value from 0 to 3
 //randomize it
 

@@ -1,0 +1,64 @@
+span {
+	
+	width: 90px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+
+#circle {
+	width: 210px;
+	height: 210px;
+	position:relative;
+	
+	margin: 30px auto;
+}
+.fill-circle {
+
+	width: 90px;
+	height: 90px;
+	position:absolute;
+	vertical-align: middle;
+	background-color:#fff;
+	border-radius:190px;
+	/*bottom four lines are a trick to align vertically and horizontally*/
+	top:50%;  
+	left: 50%; 
+	/*margin-top: negative half of childs height
+	 *margin-left: negative half of childs width
+	 */
+	margin-top:-45px; 
+	margin-left: -45px; 
+}
+
+.quarter {
+  width: 100px;
+  height: 100px;
+}
+
+.top-left {
+  border-top-left-radius: 200px;
+  background: #1fb14e;
+  float: left;
+  margin-bottom: 10px;
+}
+
+.top-right {
+  border-top-right-radius: 200px;
+  background: #1ba8e0;
+  float: right;
+  margin-bottom: 10px;
+}
+
+.bottom-left {
+  border-bottom-left-radius: 200px;
+  background: #fecc0b;
+  float: left;
+}
+
+.bottom-right {
+  border-bottom-right-radius: 200px;
+  background: #de232c;
+  float: right;
+}
