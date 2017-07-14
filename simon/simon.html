@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>The Simon Game</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Zilla+Slab:600,700" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
+<div class="container">
 <div id="circle">
-	<div class="quarter top-left"></div>
-	<div class="quarter top-right"></div>
-	<div class="quarter bottom-left"></div>
-	<div class="quarter bottom-right"></div>
+	<div class="quarter top-left" value="0"></div>
+	<div class="quarter top-right" value="1"></div>
+	<div class="quarter bottom-left" value="2"></div>
+	<div class="quarter bottom-right" value="3"></div>
 	<div class="fill-circle">
-		<span>Simon Game</span>
+		<span id="name">Simon</span>
 	</div>
 	
 </div>
-
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

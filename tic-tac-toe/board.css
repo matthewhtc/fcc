@@ -40,6 +40,10 @@ hr {
 	width: 10%;
 }
 
+.hover {
+	background: rgba(0, 0, 0, 0.5);
+}
+
 .fa-stack {
 	transition: all 0.25s ease;
 }
@@ -194,4 +198,6 @@ hr {
 	.board:hover {
 		transform:none;
 	}
+
+	
 }

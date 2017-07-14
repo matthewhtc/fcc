@@ -1,64 +1,83 @@
-span {
-	
-	width: 90px;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	text-align: center;
-}
-
-#circle {
-	width: 210px;
-	height: 210px;
-	position:relative;
-	
-	margin: 30px auto;
-}
 .fill-circle {
 
-	width: 90px;
-	height: 90px;
+	width: 190px;
+	height: 190px;
 	position:absolute;
 	vertical-align: middle;
 	background-color:#fff;
-	border-radius:190px;
+	border-radius: 50%;
 	/*bottom four lines are a trick to align vertically and horizontally*/
 	top:50%;  
 	left: 50%; 
 	/*margin-top: negative half of childs height
 	 *margin-left: negative half of childs width
 	 */
-	margin-top:-45px; 
-	margin-left: -45px; 
+	margin-top:-95px; 
+	margin-left: -95px; 
 }
 
 .quarter {
-  width: 100px;
-  height: 100px;
+	width: 200px;
+	height: 200px;
+}
+
+.bottom-right:hover {
+	background-color: #2a78f7;
 }
 
 .top-left {
-  border-top-left-radius: 200px;
-  background: #1fb14e;
-  float: left;
-  margin-bottom: 10px;
+	border-top-left-radius: 200px;
+	background: #2dd852;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.top-left-active {
+	background-color: #1fb14e;
 }
 
 .top-right {
-  border-top-right-radius: 200px;
-  background: #1ba8e0;
-  float: right;
-  margin-bottom: 10px;
+	border-top-right-radius: 200px;
+	background: #f44242; 
+	float: right;
+	margin-bottom: 10px;
+}
+
+.top-right:hover {
+	background-color: #de232c;
 }
 
 .bottom-left {
-  border-bottom-left-radius: 200px;
-  background: #fecc0b;
-  float: left;
+	border-bottom-left-radius: 200px;
+	background: #ffe102;
+	float: left;
+}
+
+.bottom-left:hover {
+	background-color: #fecc0b;
 }
 
 .bottom-right {
-  border-bottom-right-radius: 200px;
-  background: #de232c;
-  float: right;
+	border-bottom-right-radius: 200px;
+	background: #1ba8e0;
+	float: right;
+}
+
+#circle {
+	width: 410px;
+	height: 410px;
+	position:relative;
+	
+	margin: 50px auto;
+}
+
+#name {
+	width: 190px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	font-family: Zilla Slab;
+	font-size: 2.5em;
+	text-transform: uppercase;
 }
