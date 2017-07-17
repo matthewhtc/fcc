@@ -10,11 +10,27 @@ function getRandom(min, max) {
 
 //each colour squares will be given a value from 0 to 3
 //randomize it
-$(document).on("click", ".quarter", function() {
+$(document).on("mousedown mouseup", ".top-left", function() {
 	console.log(Number($(this).attr("value")));
-	$(".top-left").addClass("top-left-active"); 
-
+	$(this).toggleClass("top-left-active"); 
 }); 
+
+$(document).on("mousedown mouseup", ".top-right", function() {
+	console.log(Number($(this).attr("value")));
+	$(this).toggleClass("top-right-active"); 
+}); 
+
+$(document).on("mousedown mouseup", ".bottom-left", function() {
+	console.log(Number($(this).attr("value")));
+	$(this).toggleClass("bottom-left-active"); 
+}); 
+
+$(document).on("mousedown mouseup", ".bottom-right", function() {
+	console.log(Number($(this).attr("value")));
+	$(this).toggleClass("bottom-right-active"); 
+}); 
+
+
 //play it 
 
 //after each iteration, add 1, so that you can play 2, then 3, ... sounds
