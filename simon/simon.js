@@ -4,40 +4,47 @@ var rightAnswer = [];
 var counter = 0; 
 var iteration = 0;
 var randomIndex; 
+var speed = 2000; 
 
 function playColours() {
 	index = getRandom(0, 3); 
 	if (counter == 0) {
 		rightAnswer.push(index); 
 	}
+	//change speeds at 5th, 9th, and 13th iteration
+	if ((iteration == 4 || iteration == 8 || iteration == 12) && counter == 0) {
+		console.log("===============\nSPEED CHANGE!\n==============="); 
+		speed -= 250;
+		console.log("speed in ms: " + speed);  
+	}
 	
 	console.log("counter: " + counter + "\niteration: " + iteration); 
 	console.log("rightAnswer: " + rightAnswer); 
-	console.log("rightAnswer[counter] before setTimeout: "  + rightAnswer[counter]);
-	console.log("colourArr[rightAnswer[counter]]: " + rightAnswer[counter]);
+	// console.log("rightAnswer[counter] before setTimeout: "  + rightAnswer[counter]);
+	// console.log("colourArr[rightAnswer[counter]]: " + rightAnswer[counter]);
 	
+	// play the colour
 	$("." + colourArr[rightAnswer[counter]]).addClass(colourArr[rightAnswer[counter]] + "-active"); 
 	
-	//unplay the colour 800ms later
+	// unplay the colour 800ms later
 	setTimeout(function() {
-		console.log("counter in setTimeout: " + counter); 
-		console.log("rightAnswer in setTimeout: " + rightAnswer); 
-		console.log("rightAnswer[counter] in setTimeout: " + rightAnswer[counter]);
+		// console.log("counter in setTimeout: " + counter); 
+		// console.log("rightAnswer in setTimeout: " + rightAnswer); 
+		// console.log("rightAnswer[counter] in setTimeout: " + rightAnswer[counter]);
 		$("." + colourArr[rightAnswer[counter]]).removeClass(colourArr[rightAnswer[counter]] + "-active"); 	
 
 		counter++; 
 
-	}, 800); 
+	}, 500); 
 
 	var pineapple = setTimeout(function() {
 		playColours(); 
-	}, 2000);
+	}, speed);
 
+	//ends the "playing" from the computer
 	if (counter == iteration) {
 		clearTimeout(pineapple); 
 	}
-
-	
 }
 
 function getRandom(min, max) {
@@ -82,7 +89,7 @@ $(".quarter").on("mouseup", function(event) {
 	}, 300); 
 
 	if (userAnswer.length == rightAnswer.length) {
-		console.log("userAnswer array: " + userAnswer);
+		console.log("userAnswer: " + userAnswer);
 		if (isArrSame(rightAnswer, userAnswer)) {
 			console.log("hello, world!");
 		} else {
@@ -94,9 +101,8 @@ $(".quarter").on("mouseup", function(event) {
 		iteration++; 
 		userAnswer = []; 
 
-
 		// start next iteration of Simon
-		setTimeout(playColours, 3000);
+		setTimeout(playColours, 2000);
 	}
 }); 
 
