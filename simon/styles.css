@@ -63,6 +63,13 @@
 	background-color: #1588b5;
 }
 
+.labels {
+	margin-top: 32px;
+	text-align: center;
+	font-family: Roboto Condensed;
+	text-transform: uppercase;
+	font-size: 0.8em;
+}
 #circle {
 	width: 410px;
 	height: 410px;
@@ -87,7 +94,7 @@
 	position: relative;
 	top: 55%;
 	transform: translateY(-50%);
-	/*background: pink;*/
+	/*background: yellow;*/
 }
 
 #counter, #startButton, #strictButton, .title {
@@ -101,12 +108,13 @@
 
 #counter {
 	left: 6%;
-	height: 35px;
+	height: 30px;
 	width: 50px;
 	background-color: blue; 
 	border-radius: 10%;
 
 }
+
 
 #startButton {
 	left: 0;
@@ -124,4 +132,7 @@
 	width: 30px;
 	background-color: red;
 	border-radius: 50%; 
+}
+#strict {
+	float: right;
 }
