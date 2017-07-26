@@ -107,7 +107,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #515966;
+	background-color: #191919;
 	-webkit-transition: .4s;
 	transition: .4s;
 }
@@ -214,6 +214,4 @@ input:checked + .slider:before {
 	background-color: red;
 	border-radius: 50%; 
 }
-/*#strict {
-	float: right;
-}*/
+

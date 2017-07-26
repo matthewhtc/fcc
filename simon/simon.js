@@ -6,6 +6,12 @@ var iteration = 0;
 var randomIndex; 
 var speed = 2000; 
 
+$('input[type=checkbox]').change(function() {
+	if (this.checked) {
+		alert('checked');
+	}
+});
+
 function playColours() {
 	index = getRandom(0, 3); 
 	if (counter == 0) {
