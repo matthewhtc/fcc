@@ -120,9 +120,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
-	transform: translateX(26px);
+	-webkit-transform: translateX(21px);
+	-ms-transform: translateX(21px);
+	transform: translateX(21px);
 }
 #circle {
 	width: 410px;
