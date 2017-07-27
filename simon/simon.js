@@ -6,15 +6,29 @@ var iteration = 0;
 var randomIndex; 
 var speed = 2000; 
 
+// input checkbox event listener
 $('input[type=checkbox]').change(function() {
+	
 	if (this.checked) {
-		alert('checked');
 		// enable start and strict button event listener
+		$(document).on("click", "#startButton", function() {
+			console.log("clicked start button!"); 
+		}); 	
+
+		$(document).on("click", "#strictButton", function() {
+			console.log("clicked strict button!"); 
+		}); 
+	} else {
+		//turn off the buttons if the switch is off
+		$(document).off("click", "#startButton");
+		$(document).off("click", "#strictButton");
 	}
 });
 
 function playColours() {
+
 	index = getRandom(0, 3); 
+
 	if (counter == 0) {
 		rightAnswer.push(index); 
 	}
