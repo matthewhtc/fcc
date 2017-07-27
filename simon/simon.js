@@ -81,7 +81,9 @@ function playColours() {
 // input checkbox event listener
 $('input[type=checkbox]').change(function() {
 
-	if (this.checked) {
+	if (this.checked) { // check if the input has been 'checked'
+		// display something in the counterDisplay to signify that game is on
+	$("#counterDisplay").html("--"); 
 
 		// enable start and strict button event listener
 		$(document).on("click", ".start-button", function() {
