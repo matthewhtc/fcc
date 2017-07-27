@@ -9,6 +9,7 @@ var speed = 2000;
 $('input[type=checkbox]').change(function() {
 	if (this.checked) {
 		alert('checked');
+		// enable start and strict button event listener
 	}
 });
 
