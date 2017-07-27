@@ -188,7 +188,23 @@ input:checked + .slider:before {
 	width: 50px;
 	background-color: #191919; 
 	border-radius: 10%;
+	font-family: VT323;
+	color: red;
+	line-height: 30px;
+	text-align: center;
+}
 
+#counterDisplay {
+	font-size: 25px;
+}
+
+#countLabel {
+	height: 14px;
+	line-height: 14px;
+	font-family: Roboto Condensed;
+	text-transform: uppercase;
+	font-size: 0.8em; 
+	color: black;
 }
 
 .start-button, .strict-button {
