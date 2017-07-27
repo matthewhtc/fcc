@@ -1,4 +1,3 @@
-
 .fill-circle {
 	width: 210px;
 	height: 210px;
@@ -81,10 +80,6 @@
 	font-family: Roboto Condensed;
 	text-transform: uppercase;
 	font-size: 0.8em;
-}
-
-.toggle-label {
-	
 }
 
 /*code for sliders*/
@@ -176,7 +171,7 @@ input:checked + .slider:before {
 	transform: translateY(-50%);
 }
 
-#counter, #startButton, #strictButton {
+#counter, .start-button, .strict-button {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -196,23 +191,34 @@ input:checked + .slider:before {
 
 }
 
+.start-button, .strict-button {
+	cursor: pointer;
+}
 
-#startButton {
+.start-button {
 	left: 0;
 	right: 0;
 	margin: 0 auto;
 	height: 30px;
 	width: 30px;
-	background-color: green;
+	background-color: #00c100;
 	border-radius: 50%; 
 }
 
-#strictButton {
+.start-button-active {
+	background-color: green; 
+}
+
+.strict-button {
 	right: 10%;
 	height: 30px;
 	width: 30px;
-	background-color: red;
 	border-radius: 50%; 
+	background-color: red;
+}
+
+.strict-button-active {
+	background-color: #d10000; 
 }
 
 @media screen and (max-width: 500px){

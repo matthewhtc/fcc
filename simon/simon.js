@@ -6,24 +6,29 @@ var iteration = 0;
 var randomIndex; 
 var speed = 2000; 
 
-// input checkbox event listener
-$('input[type=checkbox]').change(function() {
-	
-	if (this.checked) {
-		// enable start and strict button event listener
-		$(document).on("click", "#startButton", function() {
-			console.log("clicked start button!"); 
-		}); 	
+/*
+ * UTILITY FUNCTIONS
+ *
+ */
+function isArrSame(arr1, arr2) {
+	// compare lengths - can save a lot of time 
+    if (arr1.length != arr2.length) {
+        return false;
+    }
 
-		$(document).on("click", "#strictButton", function() {
-			console.log("clicked strict button!"); 
-		}); 
-	} else {
-		//turn off the buttons if the switch is off
-		$(document).off("click", "#startButton");
-		$(document).off("click", "#strictButton");
+	for (var i = 0; i < arr1.length; i++) {
+		if (arr1[i] != arr2[i]) {
+			return false; 
+		}
 	}
-});
+	return true; 
+}
+
+function getRandom(min, max) {
+	//if you ever don't understand this math, just think about the math again
+	//rmb that math.random() returns a number between 0 and 1 exclusive
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function playColours() {
 
@@ -68,11 +73,39 @@ function playColours() {
 	}
 }
 
-function getRandom(min, max) {
-	//if you ever don't understand this math, just think about the math again
-	//rmb that math.random() returns a number between 0 and 1 exclusive
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+/*
+ * EVENT LISTENERS
+ *
+ */
+
+// input checkbox event listener
+$('input[type=checkbox]').change(function() {
+
+	if (this.checked) {
+
+		// enable start and strict button event listener
+		$(document).on("click", ".start-button", function() {
+			console.log("clicked start button!"); 
+
+			// start the game
+			playColours();
+			$(".start-button").addClass("start-button-active");
+			// turn off the button right away cuz only need to play it once
+			$(document).off("click", ".start-button");
+		}); 	
+
+		// strict button event listener
+		$(document).on("click", ".strict-button", function() {
+			console.log("clicked strict button!"); 
+		}); 
+	} else {
+		//turn off the buttons if the switch is off
+		$(document).off("click", ".start-button");
+		$(document).off("click", ".strict-button");
+	}
+});
+
+
 
 
 //continuously play colours
@@ -80,21 +113,28 @@ function getRandom(min, max) {
 //each colour squares will be given a value from 0 to 3
 //randomize it
 
-playColours();
 
-function isArrSame(arr1, arr2) {
-	// compare lengths - can save a lot of time 
-    if (arr1.length != arr2.length) {
-        return false;
-    }
 
-	for (var i = 0; i < arr1.length; i++) {
-		if (arr1[i] != arr2[i]) {
-			return false; 
-		}
-	}
-	return true; 
-}
+/*
+ * changing background colour on click
+ */
+$(".strict-button").on("mouseup", function() {
+	$(this).addClass("strict-button-active");
+
+	setTimeout(function() {
+		$(".strict-button").removeClass("strict-button-active"); 
+	}, 300);
+});
+
+$(".start-button").on("mouseup", function() {
+	$(this).addClass("start-button-active");
+
+	setTimeout(function() {
+		$(".start-button").removeClass("start-button-active"); 
+	}, 300);
+});
+
+
 	
 $(".quarter").on("mouseup", function(event) {
 	// get number value from colour, get corresponding colour name from array
@@ -104,13 +144,13 @@ $(".quarter").on("mouseup", function(event) {
 	$(this).addClass(className + "-active"); 
 
 	setTimeout(function() {
-		$("." + className).removeClass(className + "-active"); 
-
-		
+		$("." + className).removeClass(className + "-active"); 		
 	}, 300); 
 
 	if (userAnswer.length == rightAnswer.length) {
 		console.log("userAnswer: " + userAnswer);
+
+		//check if the arrays's contents are the same
 		if (isArrSame(rightAnswer, userAnswer)) {
 			console.log("hello, world!");
 		} else {
