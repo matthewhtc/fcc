@@ -229,7 +229,7 @@ input:checked + .slider:before {
 	height: 30px;
 	width: 30px;
 	border-radius: 50%; 
-	background-color: red;
+	background-color: #ff2b2b;
 }
 
 .strict-button-active {
@@ -247,7 +247,7 @@ input:checked + .slider:before {
 .toggleLabel {
 	font-family: Roboto Condensed;
 	text-transform: uppercase;
-	font-size: 0.9em;
+	font-size: 0.86em;
 }
 
 @media screen and (max-width: 500px){

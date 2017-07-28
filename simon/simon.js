@@ -19,12 +19,14 @@ var colourObjArr = [
 ];
 
 var userAnswer = []; 
+var userTryAgain = false; 
 var rightAnswer = []; 
 var counter = 0; 
 var iteration = 1;
 var randomIndex; 
 var speed = 2000; 
 var pineapple; 
+var strictMode = false; 
 
 /*
  * UTILITY FUNCTIONS
@@ -71,18 +73,51 @@ function temp() {
 		//check if the arrays's contents are the same
 		if (isArrSame(rightAnswer, userAnswer)) {
 			console.log("hello, world!");
+
+			/*NON STRICT MODE*/
+			// reset counter, increment iteration, and reset userAnswer/rightAnswer array
+			counter = 0; 
+			iteration++; 
+			userAnswer = []; 
+			userTryAgain = false; 
+
+			// start next iteration of Simon
+			setTimeout(playColours, 2000);
 		} else { // otherwise, the player got it wrong
 			$("#counterDisplay").html("!!"); 
+
 			console.log("goodbye, world :("); 
+
+			// redisplay what iteration user is on in counter display
+			setTimeout(function() {
+				$("#counterDisplay").html(iteration);
+			}, 1500);
+
+			// if strict mode, restart with new pattern set
+			if(strictMode) {
+				userAnswer = [];
+				rightAnswer = []; 
+				counter = 0; 
+				iteration = 1; 
+				speed = 2000; 
+			} else {
+				// set up stuff if the user gets it wrong
+				userAnswer = []; 
+				counter = 0; 
+				userTryAgain = true; 
+			}
+			
+			// play the button presses again for the user 
+			setTimeout(playColours, 3000);
 		}
 		
-		// reset counter, increment iteration, and reset userAnswer/rightAnswer array
-		counter = 0; 
-		iteration++; 
-		userAnswer = []; 
+		// // reset counter, increment iteration, and reset userAnswer/rightAnswer array
+		// counter = 0; 
+		// iteration++; 
+		// userAnswer = []; 
 
-		// start next iteration of Simon
-		setTimeout(playColours, 2000);
+		// // start next iteration of Simon
+		// setTimeout(playColours, 2000);
 	}
 }
 
@@ -90,7 +125,7 @@ function playColours() {
 	$(".quarter").off("mouseup", temp);
 	index = getRandom(0, 3); 
 
-	if (counter == 0) {
+	if (counter == 0 && userTryAgain == false) {
 		rightAnswer.push(index); 
 	}
 	//change speeds at 5th, 9th, and 13th iteration
@@ -154,9 +189,10 @@ $('input[type=checkbox]').change(function() {
 		userAnswer = [];
 		rightAnswer = []; 
 		counter = 0; 
-		iteration = 1;
-		randomIndex; 
+		iteration = 1; 
 		speed = 2000; 
+		userTryAgain = false; 
+		strictMode = false; 
 
 		// enable start and strict button event listener
 		$(document).on("click", ".start-button", function() {
@@ -172,7 +208,24 @@ $('input[type=checkbox]').change(function() {
 		// strict button event listener
 		$(document).on("click", ".strict-button", function() {
 			console.log("clicked strict button!"); 
+			strictMode = true; 
 		}); 
+
+		/*
+		 * changing background colour on click
+		 */
+		$(".strict-button").on("click", function() {
+			$(this).toggleClass("strict-button-active");
+		});
+
+		$(".start-button").on("mouseup", function() {
+			$(this).addClass("start-button-active");
+
+			setTimeout(function() {
+				$(".start-button").removeClass("start-button-active"); 
+			}, 300);
+		});
+
 	} else { // otherwise, the game is off
 
 		// TURN OFF THE GAME!!! aka clearTimeout
@@ -181,6 +234,8 @@ $('input[type=checkbox]').change(function() {
 		// turn off the buttons if the switch is off
 		$(document).off("click", ".start-button");
 		$(document).off("click", ".strict-button");
+		$(".strict-button").off("click");
+		$(".start-button").off("mouseup");
 
 		// clear display in counter
 		$("#counterDisplay").empty(); 
@@ -190,21 +245,3 @@ $('input[type=checkbox]').change(function() {
 	}
 });
 
-/*
- * changing background colour on click
- */
-$(".strict-button").on("mouseup", function() {
-	$(this).addClass("strict-button-active");
-
-	setTimeout(function() {
-		$(".strict-button").removeClass("strict-button-active"); 
-	}, 300);
-});
-
-$(".start-button").on("mouseup", function() {
-	$(this).addClass("start-button-active");
-
-	setTimeout(function() {
-		$(".start-button").removeClass("start-button-active"); 
-	}, 300);
-});
