@@ -246,6 +246,9 @@ $('input[type=checkbox]').change(function() {
 
 		// disable clicking colours
 		$(".quarter").off("mouseup");
+
+		// if strict button is on, turn it off 
+		$(".strict-button").removeClass("strict-button-active");
 	}
 });
 
