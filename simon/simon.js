@@ -2,9 +2,10 @@ var colourArr = ["top-left", "top-right", "bottom-left", "bottom-right"];
 var userAnswer = []; 
 var rightAnswer = []; 
 var counter = 0; 
-var iteration = 0;
+var iteration = 1;
 var randomIndex; 
 var speed = 2000; 
+var pineapple; 
 
 /*
  * UTILITY FUNCTIONS
@@ -30,24 +31,57 @@ function getRandom(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function playColours() {
+function temp() {
+	// get number value from colour, get corresponding colour name from array
+	userAnswer.push(Number($(this).attr("value")));
 
+	var className = colourArr[Number($(this).attr("value"))];
+	$(this).addClass(className + "-active"); 
+
+	setTimeout(function() {
+		$("." + className).removeClass(className + "-active"); 		
+	}, 300); 
+
+	if (userAnswer.length == rightAnswer.length) {
+		console.log("userAnswer: " + userAnswer);
+
+		//check if the arrays's contents are the same
+		if (isArrSame(rightAnswer, userAnswer)) {
+			console.log("hello, world!");
+		} else { // otherwise, the player got it wrong
+			$("#counterDisplay").html("!!"); 
+			console.log("goodbye, world :("); 
+		}
+		
+		// reset counter, increment iteration, and reset userAnswer/rightAnswer array
+		counter = 0; 
+		iteration++; 
+		userAnswer = []; 
+
+		// start next iteration of Simon
+		setTimeout(playColours, 2000);
+	}
+}
+
+function playColours() {
+	$(".quarter").off("mouseup", temp);
 	index = getRandom(0, 3); 
 
 	if (counter == 0) {
 		rightAnswer.push(index); 
 	}
 	//change speeds at 5th, 9th, and 13th iteration
-	if ((iteration == 4 || iteration == 8 || iteration == 12) && counter == 0) {
+	if ((iteration == 5 || iteration == 9 || iteration == 13) && counter == 0) {
 		console.log("===============\nSPEED CHANGE!\n==============="); 
 		speed -= 250;
 		console.log("speed in ms: " + speed);  
 	}
 	
+	// update what count it is, for the user, in the countDisplay
+	$("#counterDisplay").html(iteration); 
+
 	console.log("counter: " + counter + "\niteration: " + iteration); 
 	console.log("rightAnswer: " + rightAnswer); 
-	// console.log("rightAnswer[counter] before setTimeout: "  + rightAnswer[counter]);
-	// console.log("colourArr[rightAnswer[counter]]: " + rightAnswer[counter]);
 	
 	// play the colour
 	$("." + colourArr[rightAnswer[counter]]).addClass(colourArr[rightAnswer[counter]] + "-active"); 
@@ -63,13 +97,14 @@ function playColours() {
 
 	}, 500); 
 
-	var pineapple = setTimeout(function() {
+	pineapple = setTimeout(function() {
 		playColours(); 
 	}, speed);
 
 	//ends the "playing" from the computer
-	if (counter == iteration) {
+	if (counter == iteration - 1) {
 		clearTimeout(pineapple); 
+		$(".quarter").on("mouseup", temp);
 	}
 }
 
@@ -83,7 +118,18 @@ $('input[type=checkbox]').change(function() {
 
 	if (this.checked) { // check if the input has been 'checked'
 		// display something in the counterDisplay to signify that game is on
-	$("#counterDisplay").html("--"); 
+		$("#counterDisplay").html("--"); 
+
+		// enable colour buttons
+		$(".quarter").on("mouseup", temp); 
+
+		// basically reset all parameters just in case
+		userAnswer = [];
+		rightAnswer = []; 
+		counter = 0; 
+		iteration = 1;
+		randomIndex; 
+		speed = 2000; 
 
 		// enable start and strict button event listener
 		$(document).on("click", ".start-button", function() {
@@ -100,22 +146,22 @@ $('input[type=checkbox]').change(function() {
 		$(document).on("click", ".strict-button", function() {
 			console.log("clicked strict button!"); 
 		}); 
-	} else {
-		//turn off the buttons if the switch is off
+	} else { // otherwise, the game is off
+
+		// TURN OFF THE GAME!!! aka clearTimeout
+		clearTimeout(pineapple); 
+
+		// turn off the buttons if the switch is off
 		$(document).off("click", ".start-button");
 		$(document).off("click", ".strict-button");
+
+		// clear display in counter
+		$("#counterDisplay").empty(); 
+
+		// disable clicking colours
+		$(".quarter").off("mouseup");
 	}
 });
-
-
-
-
-//continuously play colours
-
-//each colour squares will be given a value from 0 to 3
-//randomize it
-
-
 
 /*
  * changing background colour on click
@@ -138,35 +184,35 @@ $(".start-button").on("mouseup", function() {
 
 
 	
-$(".quarter").on("mouseup", function(event) {
-	// get number value from colour, get corresponding colour name from array
-	userAnswer.push(Number($(this).attr("value")));
+// $(".quarter").on("mouseup", function(event) {
+// 	// get number value from colour, get corresponding colour name from array
+// 	userAnswer.push(Number($(this).attr("value")));
 
-	var className = colourArr[Number($(this).attr("value"))];
-	$(this).addClass(className + "-active"); 
+// 	var className = colourArr[Number($(this).attr("value"))];
+// 	$(this).addClass(className + "-active"); 
 
-	setTimeout(function() {
-		$("." + className).removeClass(className + "-active"); 		
-	}, 300); 
+// 	setTimeout(function() {
+// 		$("." + className).removeClass(className + "-active"); 		
+// 	}, 300); 
 
-	if (userAnswer.length == rightAnswer.length) {
-		console.log("userAnswer: " + userAnswer);
+// 	if (userAnswer.length == rightAnswer.length) {
+// 		console.log("userAnswer: " + userAnswer);
 
-		//check if the arrays's contents are the same
-		if (isArrSame(rightAnswer, userAnswer)) {
-			console.log("hello, world!");
-		} else {
-			console.log("goodbye, world :("); 
-		}
+// 		//check if the arrays's contents are the same
+// 		if (isArrSame(rightAnswer, userAnswer)) {
+// 			console.log("hello, world!");
+// 		} else { // otherwise, the player got it wrong
+// 			$("#counterDisplay").html("!!"); 
+// 			console.log("goodbye, world :("); 
+// 		}
 		
-		// reset counter, increment iteration, and reset userAnswer/rightAnswer array
-		counter = 0; 
-		iteration++; 
-		userAnswer = []; 
+// 		// reset counter, increment iteration, and reset userAnswer/rightAnswer array
+// 		counter = 0; 
+// 		iteration++; 
+// 		userAnswer = []; 
 
-		// start next iteration of Simon
-		setTimeout(playColours, 2000);
-	}
-}); 
+// 		// start next iteration of Simon
+// 		setTimeout(playColours, 2000);
+// 	}
+// }); 
 
-// speed up at 5, 9, 13
