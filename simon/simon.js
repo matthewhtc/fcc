@@ -86,6 +86,10 @@ function temp() {
 		} else { // otherwise, the player got it wrong
 			$("#counterDisplay").html("!!"); 
 
+			// play error sound
+			var userSound = document.getElementById("audio-error");
+			userSound.play();
+
 			console.log("goodbye, world :("); 
 
 			// redisplay what iteration user is on in counter display
