@@ -1,4 +1,23 @@
 var colourArr = ["top-left", "top-right", "bottom-left", "bottom-right"]; 
+var colourObjArr = [
+	{
+		name: "top-left", 
+		sound: "audio-green"
+	},
+	{
+		name: "top-right", 
+		sound: "audio-red"
+	},
+	{
+		name: "bottom-left", 
+		sound: "audio-yellow"
+	},
+	{
+		name: "bottom-right", 
+		sound: "audio-blue"
+	}
+];
+
 var userAnswer = []; 
 var rightAnswer = []; 
 var counter = 0; 
@@ -35,8 +54,12 @@ function temp() {
 	// get number value from colour, get corresponding colour name from array
 	userAnswer.push(Number($(this).attr("value")));
 
-	var className = colourArr[Number($(this).attr("value"))];
+	var className = colourObjArr[Number($(this).attr("value"))].name;
 	$(this).addClass(className + "-active"); 
+
+	// play sound
+	var userSound = document.getElementById(colourObjArr[Number($(this).attr("value"))].sound);
+	userSound.play();
 
 	setTimeout(function() {
 		$("." + className).removeClass(className + "-active"); 		
@@ -86,6 +109,10 @@ function playColours() {
 	// play the colour
 	$("." + colourArr[rightAnswer[counter]]).addClass(colourArr[rightAnswer[counter]] + "-active"); 
 	
+	// play sound
+	var sound = document.getElementById(colourObjArr[rightAnswer[counter]].sound);
+	sound.play();
+
 	// unplay the colour 800ms later
 	setTimeout(function() {
 		// console.log("counter in setTimeout: " + counter); 
@@ -181,38 +208,3 @@ $(".start-button").on("mouseup", function() {
 		$(".start-button").removeClass("start-button-active"); 
 	}, 300);
 });
-
-
-	
-// $(".quarter").on("mouseup", function(event) {
-// 	// get number value from colour, get corresponding colour name from array
-// 	userAnswer.push(Number($(this).attr("value")));
-
-// 	var className = colourArr[Number($(this).attr("value"))];
-// 	$(this).addClass(className + "-active"); 
-
-// 	setTimeout(function() {
-// 		$("." + className).removeClass(className + "-active"); 		
-// 	}, 300); 
-
-// 	if (userAnswer.length == rightAnswer.length) {
-// 		console.log("userAnswer: " + userAnswer);
-
-// 		//check if the arrays's contents are the same
-// 		if (isArrSame(rightAnswer, userAnswer)) {
-// 			console.log("hello, world!");
-// 		} else { // otherwise, the player got it wrong
-// 			$("#counterDisplay").html("!!"); 
-// 			console.log("goodbye, world :("); 
-// 		}
-		
-// 		// reset counter, increment iteration, and reset userAnswer/rightAnswer array
-// 		counter = 0; 
-// 		iteration++; 
-// 		userAnswer = []; 
-
-// 		// start next iteration of Simon
-// 		setTimeout(playColours, 2000);
-// 	}
-// }); 
-

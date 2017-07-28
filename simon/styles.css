@@ -84,12 +84,11 @@
 
 /*code for sliders*/
 .switch {
-
 	position: relative;
-	display: inline-block;
+	display: block;
 	width: 50px;
 	height: 29px;
-
+	margin: 0 auto;
 }
 
 .switch input {display:none;}
@@ -163,7 +162,7 @@ input:checked + .slider:before {
 
 #google {
 	line-height: 29px;
-	width: 50px;
+	width: 95px;
 	height: 29px;
 	margin: 0 auto;
 	position: relative;
@@ -235,6 +234,20 @@ input:checked + .slider:before {
 
 .strict-button-active {
 	background-color: #d10000; 
+}
+
+#offLabel {
+	float: left;
+}
+
+#onLabel {
+	float: right;
+}
+
+.toggleLabel {
+	font-family: Roboto Condensed;
+	text-transform: uppercase;
+	font-size: 0.9em;
 }
 
 @media screen and (max-width: 500px){
