@@ -82,6 +82,66 @@
 	font-size: 0.8em;
 }
 
+.start-button, .strict-button, .pointer {
+	cursor: pointer;
+}
+
+
+
+.strict-button {
+	right: 10%;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%; 
+	background-color: #ff2b2b;
+}
+
+.strict-button-active {
+	background-color: #a81c1c; 
+}
+
+.toggleLabel {
+	font-family: Roboto Condensed;
+	text-transform: uppercase;
+	font-size: 0.86em;
+}
+
+.counter, .start-button, .strict-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.start-button {
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	height: 30px;
+	width: 30px;
+	background-color: #00c100;
+	border-radius: 50%; 
+}
+
+.start-button-active {
+	background-color: green; 
+}
+
+.counter {
+	left: 6%;
+	height: 30px;
+	width: 50px;
+	background-color: #191919; 
+	border-radius: 10%;
+	font-family: VT323;
+	color: red;
+	line-height: 30px;
+	text-align: center;
+}
+
+
 /*code for sliders*/
 .switch {
 	position: relative;
@@ -170,31 +230,16 @@ input:checked + .slider:before {
 	transform: translateY(-50%);
 }
 
-#counter, .start-button, .strict-button {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	margin-left: 10px;
-	margin-right: 10px;
-	display: inline-block;
-}
 
-
-
-#counter {
-	left: 6%;
-	height: 30px;
-	width: 50px;
-	background-color: #191919; 
-	border-radius: 10%;
-	font-family: VT323;
-	color: red;
-	line-height: 30px;
-	text-align: center;
-}
 
 #counterDisplay {
 	font-size: 25px;
+	height: 30px;
+	width: 50px;
+}
+
+.counter-display-off {
+	color: #490000;
 }
 
 #countLabel {
@@ -206,35 +251,8 @@ input:checked + .slider:before {
 	color: black;
 }
 
-.start-button, .strict-button {
-	cursor: pointer;
-}
 
-.start-button {
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	height: 30px;
-	width: 30px;
-	background-color: #00c100;
-	border-radius: 50%; 
-}
 
-.start-button-active {
-	background-color: green; 
-}
-
-.strict-button {
-	right: 10%;
-	height: 30px;
-	width: 30px;
-	border-radius: 50%; 
-	background-color: #ff2b2b;
-}
-
-.strict-button-active {
-	background-color: #d10000; 
-}
 
 #offLabel {
 	float: left;
@@ -244,11 +262,7 @@ input:checked + .slider:before {
 	float: right;
 }
 
-.toggleLabel {
-	font-family: Roboto Condensed;
-	text-transform: uppercase;
-	font-size: 0.86em;
-}
+
 
 @media screen and (max-width: 500px){
 
@@ -266,4 +280,3 @@ input:checked + .slider:before {
 		transform-origin: 0 0;
 	}
 }
-

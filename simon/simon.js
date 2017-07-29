@@ -18,14 +18,13 @@ var colourObjArr = [
 ];
 
 var userAnswer = []; 
-var userTryAgain = false; 
 var rightAnswer = []; 
+var userTryAgain = false; 
 var counter = 0; 
 var answerCounter = 0; 
 var iteration = 1;
-var winningIteration = 3; 
-var randomIndex; 
-var speed = 1750; 
+var winningIteration = 20; 
+var speed = 1850; 
 var pineapple; 
 var strictMode = false; 
 
@@ -34,13 +33,52 @@ var strictMode = false;
  *
  */
 function resetGame() {
+	clearTimeout(pineapple); 
 	userAnswer = [];
 	rightAnswer = []; 
+	userTryAgain = false; 
 	counter = answerCounter = 0; 
 	iteration = 1; 
-	speed = 2000; 
-	userTryAgain = false; 
+	speed = 1800; 
 	strictMode = false; 
+}
+
+function startGame() {
+	clearTimeout(pineapple); 
+	// start the game || restart
+	$(".quarter").off("mouseup", temp);
+	
+	$(".quarter").removeClass("pointer"); 
+
+	
+	$("#counterDisplay").html("--"); 
+	 // note: bug somewhere here... test tmr this: click restart during playback, then click another colour.
+	pineapple = setTimeout(function() {
+		resetGame();
+		playColours();
+	}, 1800); 
+}
+
+function turnOffGame() {
+	// TURN OFF THE GAME!!! aka clearTimeout
+	clearTimeout(pineapple); 
+
+	// turn off the buttons if the switch is off
+	$(".start-button").off("click");
+	$(document).off("click", ".strict-button");
+	$(".strict-button").off("click");
+	$(".start-button").off("mouseup");
+
+	// clear display in counter
+	$("#counterDisplay").toggleClass("counter-display-off"); 
+	$("#counterDisplay").html("--"); 
+
+	// disable clicking colours
+	$(".quarter").off("mouseup", temp);
+	$(".quarter").removeClass("pointer"); 
+
+	// if strict button is on, turn it off 
+	$(".strict-button").removeClass("strict-button-active");
 }
 
 function isArrSame(arr1, arr2) {
@@ -89,7 +127,7 @@ function temp() {
 			if (isArrSame(rightAnswer, userAnswer)) {
 				// again, disable for crazy users who will spam click
 				$(".quarter").off("mouseup", temp);
-
+				$(".quarter").removeClass("pointer"); 
 				console.log("hello, world!");
 
 				// check for winner
@@ -114,24 +152,18 @@ function temp() {
 				}
 				
 				// start next iteration of Simon
-				setTimeout(playColours, 3500);
+				setTimeout(playColours, 3250);
 			} 
 		}
 	} else { // if they don't match, then it's wrong
+			console.log("goodbye, world :("); 
 			// disable click for users in case they do something stupid and rage quit/click
 			$(".quarter").off("mouseup", temp);
-
+			$(".quarter").removeClass("pointer"); 
 			// play error sound & display error in display
 			var userSound = document.getElementById("audio-error");
 			userSound.play();
 			$("#counterDisplay").html("!!"); // displaying
-
-			
-
-			// redisplay what iteration user is on in counter display
-			setTimeout(function() {
-				$("#counterDisplay").html(iteration);
-			}, 1500);
 
 			// if strict mode, restart with new pattern set
 			if(strictMode) {
@@ -146,23 +178,30 @@ function temp() {
 				counter = 0; 
 				userTryAgain = true; 
 			}
-			
+
+			// redisplay what iteration user is on in counter display
+			setTimeout(function() {
+				$("#counterDisplay").html(iteration);
+			}, 1500);
+
 			answerCounter = 0; 
 			//	 play the button presses again for the user 
-			console.log("counter before setTimeout when user gets it wrong: " + counter); 
 			setTimeout(playColours, 3500);
 	}	
 }
 
 function playColours() {
+	console.log("current speed: " + speed); 
 	$(".quarter").off("mouseup", temp);
+	$(".quarter").removeClass("pointer"); 
 	index = getRandom(0, 3); 
 
 	if (counter == 0 && userTryAgain == false) {
 		rightAnswer.push(index); 
 	}
 	//change speeds at 5th, 9th, and 13th iteration
-	if ((iteration == 5 || iteration == 9 || iteration == 13) && counter == 0) {
+	if ((iteration == 5 || iteration == 9 || iteration == 13) && counter == 0 && userTryAgain == false) {
+		console.log("speed: " + speed); 
 		speed -= 250;  
 	}
 	
@@ -173,11 +212,11 @@ function playColours() {
 	console.log("rightAnswer: " + rightAnswer); 
 	
 	// play the colour
-	console.log("counter: " + counter); 
-	console.log("colourObjArr: " + colourObjArr); 
-	console.log("rightAnswer[counter]: " + rightAnswer[counter]);
-	console.log("colourObjArr[rightAnswer[counter]]: " + colourObjArr[rightAnswer[counter]]); 
-	console.log("damn: " + colourObjArr[rightAnswer[counter]].name); 
+	// console.log("counter: " + counter); 
+	// console.log("colourObjArr: " + colourObjArr); 
+	// console.log("rightAnswer[counter]: " + rightAnswer[counter]);
+	// console.log("colourObjArr[rightAnswer[counter]]: " + colourObjArr[rightAnswer[counter]]); 
+	// console.log("damn: " + colourObjArr[rightAnswer[counter]].name); 
 	$("." + colourObjArr[rightAnswer[counter]].name).addClass(colourObjArr[rightAnswer[counter]].name + "-active"); 
 	
 	// play sound
@@ -201,6 +240,7 @@ function playColours() {
 		clearTimeout(pineapple); 
 		setTimeout(function() {
 			$(".quarter").on("mouseup", temp);
+			$(".quarter").addClass("pointer"); 
 		}, 1250); 
 	}
 }
@@ -215,21 +255,18 @@ $('input[type=checkbox]').change(function() {
 
 	if (this.checked) { // check if the input has been 'checked'
 		// display something in the counterDisplay to signify that game is on
+		$("#counterDisplay").toggleClass("counter-display-off"); 
 		$("#counterDisplay").html("--"); 
-
-		// enable colour buttons
-		$(".quarter").on("mouseup", temp); 
 
 		// basically reset all parameters just in case
 		resetGame(); 
 
 		// enable start and strict button event listener
-		$(document).on("click", ".start-button", function() {
-			// start the game
-			playColours();
-			$(".start-button").addClass("start-button-active");
-			// turn off the button right away cuz only need to play it once
-			$(document).off("click", ".start-button");
+		$(".start-button").on("click", function() {
+			
+			startGame(); 
+			
+			
 		}); 	
 
 		// strict button event listener
@@ -245,32 +282,15 @@ $('input[type=checkbox]').change(function() {
 		});
 
 		$(".start-button").on("mouseup", function() {
-			$(this).addClass("start-button-active");
+			$(".start-button").toggleClass("start-button-active");
 
 			setTimeout(function() {
-				$(".start-button").removeClass("start-button-active"); 
+				$(".start-button").toggleClass("start-button-active"); 
 			}, 300);
 		});
 
 	} else { // otherwise, the game is off
-
-		// TURN OFF THE GAME!!! aka clearTimeout
-		clearTimeout(pineapple); 
-
-		// turn off the buttons if the switch is off
-		$(document).off("click", ".start-button");
-		$(document).off("click", ".strict-button");
-		$(".strict-button").off("click");
-		$(".start-button").off("mouseup");
-
-		// clear display in counter
-		$("#counterDisplay").empty(); 
-
-		// disable clicking colours
-		$(".quarter").off("mouseup");
-
-		// if strict button is on, turn it off 
-		$(".strict-button").removeClass("strict-button-active");
+			turnOffGame(); 
 	}
 });
 
