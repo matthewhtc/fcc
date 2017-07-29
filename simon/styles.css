@@ -1,3 +1,19 @@
+body {
+	background: #f29492;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to top, #114357, #f29492);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to top, #114357, #f29492) no-repeat center center fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background-size: cover;
+
+}
+
+/*
+potential gradients:
+linear-gradient(to top, #274046, #E6DADA)
+linear-gradient(to top, #003973, #e5e5be)
+linear-gradient(to top, #757f9a, #d7dde8)
+linear-gradient(to top, #114357, #f29492) pizelex
+*/
+
 .fill-circle {
 	width: 210px;
 	height: 210px;
@@ -85,8 +101,6 @@
 .start-button, .strict-button, .pointer {
 	cursor: pointer;
 }
-
-
 
 .strict-button {
 	right: 10%;
@@ -191,6 +205,7 @@ input:checked + .slider:before {
 	-ms-transform: translateX(21px);
 	transform: translateX(21px);
 }
+
 #circle {
 	width: 410px;
 	height: 410px;
@@ -230,8 +245,6 @@ input:checked + .slider:before {
 	transform: translateY(-50%);
 }
 
-
-
 #counterDisplay {
 	font-size: 25px;
 	height: 30px;
@@ -251,9 +264,6 @@ input:checked + .slider:before {
 	color: black;
 }
 
-
-
-
 #offLabel {
 	float: left;
 }
@@ -261,8 +271,6 @@ input:checked + .slider:before {
 #onLabel {
 	float: right;
 }
-
-
 
 @media screen and (max-width: 500px){
 

@@ -49,7 +49,6 @@ function startGame() {
 	
 	$(".quarter").removeClass("pointer"); 
 
-	
 	$("#counterDisplay").html("--"); 
 	 // note: bug somewhere here... test tmr this: click restart during playback, then click another colour.
 	pineapple = setTimeout(function() {
@@ -251,10 +250,7 @@ $('input[type=checkbox]').change(function() {
 
 		// enable start and strict button event listener
 		$(".start-button").on("click", function() {
-			
-			startGame(); 
-			
-			
+			startGame(); 		
 		}); 	
 
 		// strict button event listener
