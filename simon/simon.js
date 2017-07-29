@@ -1,4 +1,3 @@
-var colourArr = ["top-left", "top-right", "bottom-left", "bottom-right"]; 
 var colourObjArr = [
 	{
 		name: "top-left", 
@@ -22,9 +21,11 @@ var userAnswer = [];
 var userTryAgain = false; 
 var rightAnswer = []; 
 var counter = 0; 
+var answerCounter = 0; 
 var iteration = 1;
+var winningIteration = 3; 
 var randomIndex; 
-var speed = 2000; 
+var speed = 1750; 
 var pineapple; 
 var strictMode = false; 
 
@@ -32,6 +33,16 @@ var strictMode = false;
  * UTILITY FUNCTIONS
  *
  */
+function resetGame() {
+	userAnswer = [];
+	rightAnswer = []; 
+	counter = answerCounter = 0; 
+	iteration = 1; 
+	speed = 2000; 
+	userTryAgain = false; 
+	strictMode = false; 
+}
+
 function isArrSame(arr1, arr2) {
 	// compare lengths - can save a lot of time 
     if (arr1.length != arr2.length) {
@@ -67,23 +78,41 @@ function temp() {
 		$("." + className).removeClass(className + "-active"); 		
 	}, 300); 
 
-	if (userAnswer.length == rightAnswer.length) {
-		console.log("userAnswer: " + userAnswer);
+	if (userAnswer[answerCounter] == rightAnswer[answerCounter]) {
+		answerCounter++; 
+		if (userAnswer.length == rightAnswer.length) {
+			console.log("userAnswer: " + userAnswer);
 
-		//check if the arrays's contents are the same
-		if (isArrSame(rightAnswer, userAnswer)) {
-			console.log("hello, world!");
+			//check if the arrays's contents are the same
+			if (isArrSame(rightAnswer, userAnswer)) {
+				console.log("hello, world!");
 
-			/*NON STRICT MODE*/
-			// reset counter, increment iteration, and reset userAnswer/rightAnswer array
-			counter = 0; 
-			iteration++; 
-			userAnswer = []; 
-			userTryAgain = false; 
+				// check for winner
+				if (iteration == winningIteration) {
+					// play celebratory winning sound
+					document.getElementById("audio-celebrate").play();
 
-			// start next iteration of Simon
-			setTimeout(playColours, 2000);
-		} else { // otherwise, the player got it wrong
+					// display a message tell the user that they won
+					$("#counterDisplay").html("YOU");
+					setTimeout(function() {
+						$("#counterDisplay").html("WIN!");
+					}, 800);
+
+					// restart the game
+					resetGame();
+				} else {
+					// reset counter, increment iteration, and reset userAnswer/rightAnswer array
+					counter = answerCounter = 0; 
+					iteration++; 
+					userAnswer = []; 
+					userTryAgain = false; 
+				}
+				
+				// start next iteration of Simon
+				setTimeout(playColours, 3500);
+			} 
+		}
+	} else { // if they don't match, then it's wrong
 			$("#counterDisplay").html("!!"); 
 
 			// play error sound
@@ -111,18 +140,10 @@ function temp() {
 				userTryAgain = true; 
 			}
 			
-			// play the button presses again for the user 
-			setTimeout(playColours, 3000);
-		}
-		
-		// // reset counter, increment iteration, and reset userAnswer/rightAnswer array
-		// counter = 0; 
-		// iteration++; 
-		// userAnswer = []; 
-
-		// // start next iteration of Simon
-		// setTimeout(playColours, 2000);
-	}
+			answerCounter = 0; 
+			//	 play the button presses again for the user 
+			setTimeout(playColours, 3500);
+	}	
 }
 
 function playColours() {
@@ -134,9 +155,7 @@ function playColours() {
 	}
 	//change speeds at 5th, 9th, and 13th iteration
 	if ((iteration == 5 || iteration == 9 || iteration == 13) && counter == 0) {
-		console.log("===============\nSPEED CHANGE!\n==============="); 
-		speed -= 250;
-		console.log("speed in ms: " + speed);  
+		speed -= 250;  
 	}
 	
 	// update what count it is, for the user, in the countDisplay
@@ -146,7 +165,7 @@ function playColours() {
 	console.log("rightAnswer: " + rightAnswer); 
 	
 	// play the colour
-	$("." + colourArr[rightAnswer[counter]]).addClass(colourArr[rightAnswer[counter]] + "-active"); 
+	$("." + colourObjArr[rightAnswer[counter]].name).addClass(colourObjArr[rightAnswer[counter]].name + "-active"); 
 	
 	// play sound
 	var sound = document.getElementById(colourObjArr[rightAnswer[counter]].sound);
@@ -154,10 +173,7 @@ function playColours() {
 
 	// unplay the colour 800ms later
 	setTimeout(function() {
-		// console.log("counter in setTimeout: " + counter); 
-		// console.log("rightAnswer in setTimeout: " + rightAnswer); 
-		// console.log("rightAnswer[counter] in setTimeout: " + rightAnswer[counter]);
-		$("." + colourArr[rightAnswer[counter]]).removeClass(colourArr[rightAnswer[counter]] + "-active"); 	
+		$("." + colourObjArr[rightAnswer[counter]].name).removeClass(colourObjArr[rightAnswer[counter]].name + "-active"); 	
 
 		counter++; 
 
@@ -190,13 +206,7 @@ $('input[type=checkbox]').change(function() {
 		$(".quarter").on("mouseup", temp); 
 
 		// basically reset all parameters just in case
-		userAnswer = [];
-		rightAnswer = []; 
-		counter = 0; 
-		iteration = 1; 
-		speed = 2000; 
-		userTryAgain = false; 
-		strictMode = false; 
+		resetGame(); 
 
 		// enable start and strict button event listener
 		$(document).on("click", ".start-button", function() {
