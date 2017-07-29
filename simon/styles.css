@@ -3,7 +3,6 @@ body {
 	background: -webkit-linear-gradient(to top, #114357, #f29492);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to top, #114357, #f29492) no-repeat center center fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background-size: cover;
-
 }
 
 /*
@@ -38,7 +37,7 @@ linear-gradient(to top, #114357, #f29492) pizelex
 	width: 500px;
 	border-radius: 50%;
 	background-color: #515966; 
-	margin: 45px auto;
+	margin: 100px auto;
 	/*horizontal offset, vertical offset, blue radius, color*/
 	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
 }
