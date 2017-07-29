@@ -63,6 +63,7 @@ function getRandom(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// this function does all the validation if user input is correct or not
 function temp() {
 	// get number value from colour, get corresponding colour name from array
 	userAnswer.push(Number($(this).attr("value")));
@@ -80,11 +81,15 @@ function temp() {
 
 	if (userAnswer[answerCounter] == rightAnswer[answerCounter]) {
 		answerCounter++; 
+		console.log("answerCounter: " + answerCounter); 
 		if (userAnswer.length == rightAnswer.length) {
 			console.log("userAnswer: " + userAnswer);
 
 			//check if the arrays's contents are the same
 			if (isArrSame(rightAnswer, userAnswer)) {
+				// again, disable for crazy users who will spam click
+				$(".quarter").off("mouseup", temp);
+
 				console.log("hello, world!");
 
 				// check for winner
@@ -113,13 +118,15 @@ function temp() {
 			} 
 		}
 	} else { // if they don't match, then it's wrong
-			$("#counterDisplay").html("!!"); 
+			// disable click for users in case they do something stupid and rage quit/click
+			$(".quarter").off("mouseup", temp);
 
-			// play error sound
+			// play error sound & display error in display
 			var userSound = document.getElementById("audio-error");
 			userSound.play();
+			$("#counterDisplay").html("!!"); // displaying
 
-			console.log("goodbye, world :("); 
+			
 
 			// redisplay what iteration user is on in counter display
 			setTimeout(function() {
@@ -142,6 +149,7 @@ function temp() {
 			
 			answerCounter = 0; 
 			//	 play the button presses again for the user 
+			console.log("counter before setTimeout when user gets it wrong: " + counter); 
 			setTimeout(playColours, 3500);
 	}	
 }
@@ -165,6 +173,11 @@ function playColours() {
 	console.log("rightAnswer: " + rightAnswer); 
 	
 	// play the colour
+	console.log("counter: " + counter); 
+	console.log("colourObjArr: " + colourObjArr); 
+	console.log("rightAnswer[counter]: " + rightAnswer[counter]);
+	console.log("colourObjArr[rightAnswer[counter]]: " + colourObjArr[rightAnswer[counter]]); 
+	console.log("damn: " + colourObjArr[rightAnswer[counter]].name); 
 	$("." + colourObjArr[rightAnswer[counter]].name).addClass(colourObjArr[rightAnswer[counter]].name + "-active"); 
 	
 	// play sound
@@ -186,7 +199,9 @@ function playColours() {
 	//ends the "playing" from the computer
 	if (counter == iteration - 1) {
 		clearTimeout(pineapple); 
-		$(".quarter").on("mouseup", temp);
+		setTimeout(function() {
+			$(".quarter").on("mouseup", temp);
+		}, 1250); 
 	}
 }
 
@@ -210,8 +225,6 @@ $('input[type=checkbox]').change(function() {
 
 		// enable start and strict button event listener
 		$(document).on("click", ".start-button", function() {
-			console.log("clicked start button!"); 
-
 			// start the game
 			playColours();
 			$(".start-button").addClass("start-button-active");
@@ -221,8 +234,7 @@ $('input[type=checkbox]').change(function() {
 
 		// strict button event listener
 		$(document).on("click", ".strict-button", function() {
-			console.log("clicked strict button!"); 
-			strictMode = true; 
+			strictMode = !strictMode; 
 		}); 
 
 		/*
