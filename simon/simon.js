@@ -39,8 +39,7 @@ function resetGame() {
 	userTryAgain = false; 
 	counter = answerCounter = 0; 
 	iteration = 1; 
-	speed = 1800; 
-	strictMode = false; 
+	speed = 1850; 
 }
 
 function startGame() {
@@ -96,8 +95,7 @@ function isArrSame(arr1, arr2) {
 }
 
 function getRandom(min, max) {
-	//if you ever don't understand this math, just think about the math again
-	//rmb that math.random() returns a number between 0 and 1 exclusive
+	// math.random() returns a number between 0 and 1 exclusive
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -117,6 +115,7 @@ function temp() {
 		$("." + className).removeClass(className + "-active"); 		
 	}, 300); 
 
+	// check if user's input matches the computer
 	if (userAnswer[answerCounter] == rightAnswer[answerCounter]) {
 		answerCounter++; 
 		console.log("answerCounter: " + answerCounter); 
@@ -152,7 +151,7 @@ function temp() {
 				}
 				
 				// start next iteration of Simon
-				setTimeout(playColours, 3250);
+				pineapple = setTimeout(playColours, 3250);
 			} 
 		}
 	} else { // if they don't match, then it's wrong
@@ -167,11 +166,7 @@ function temp() {
 
 			// if strict mode, restart with new pattern set
 			if(strictMode) {
-				userAnswer = [];
-				rightAnswer = []; 
-				counter = 0; 
-				iteration = 1; 
-				speed = 2000; 
+				resetGame(); 
 			} else {
 				// set up stuff if the user gets it wrong
 				userAnswer = []; 
@@ -186,7 +181,7 @@ function temp() {
 
 			answerCounter = 0; 
 			//	 play the button presses again for the user 
-			setTimeout(playColours, 3500);
+			pineapple = setTimeout(playColours, 3500);
 	}	
 }
 
@@ -212,11 +207,6 @@ function playColours() {
 	console.log("rightAnswer: " + rightAnswer); 
 	
 	// play the colour
-	// console.log("counter: " + counter); 
-	// console.log("colourObjArr: " + colourObjArr); 
-	// console.log("rightAnswer[counter]: " + rightAnswer[counter]);
-	// console.log("colourObjArr[rightAnswer[counter]]: " + colourObjArr[rightAnswer[counter]]); 
-	// console.log("damn: " + colourObjArr[rightAnswer[counter]].name); 
 	$("." + colourObjArr[rightAnswer[counter]].name).addClass(colourObjArr[rightAnswer[counter]].name + "-active"); 
 	
 	// play sound
@@ -231,9 +221,7 @@ function playColours() {
 
 	}, 500); 
 
-	pineapple = setTimeout(function() {
-		playColours(); 
-	}, speed);
+	pineapple = setTimeout(playColours, speed);
 
 	//ends the "playing" from the computer
 	if (counter == iteration - 1) {
