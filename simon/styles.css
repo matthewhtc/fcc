@@ -1,7 +1,7 @@
 body {
 	background: #f29492;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to top, #114357, #f29492);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to top, #114357, #f29492) no-repeat center center fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: -webkit-linear-gradient(to bottom, #114357, #f29492);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #114357, #f29492) no-repeat center center fixed; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background-size: cover;
 }
 
@@ -12,6 +12,31 @@ linear-gradient(to top, #003973, #e5e5be)
 linear-gradient(to top, #757f9a, #d7dde8)
 linear-gradient(to top, #114357, #f29492) pizelex
 */
+
+hr {
+	width: 10%;
+	border-color: #515966;
+}
+
+footer {
+	text-align: center;
+	font-family: Roboto Condensed;
+	font-size: 20px;
+	color: black;
+}
+
+a {
+	transition: all 0.25s ease;
+}
+
+a:visited, a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #1ba8e0;
+}
 
 .fill-circle {
 	width: 210px;
@@ -269,6 +294,10 @@ input:checked + .slider:before {
 
 #onLabel {
 	float: right;
+}
+
+#icons {
+	font-size: 15px; 
 }
 
 @media screen and (max-width: 500px){
